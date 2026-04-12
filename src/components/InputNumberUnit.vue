@@ -1,11 +1,17 @@
 <template>
   <div class="input-number-unit">
-    <InputNumber :label="label" :model-value="value" />
-    <select>
-      <option value="cups">cups</option>
-      <option value="g">grams</option>
-      <option value="oz">ounces</option>
-    </select>
+    <label v-if="!hideLabel">{{ label }}</label>
+    <div class="field">
+      <InputNumber :label="label" :model-value="value" hide-label />
+      <select>
+        <option value="cups">cups</option>
+        <option value="oz">ounces</option>
+        <option value="tbsp">tbsps</option>
+        <option value="tsp">tsp</option>
+        <option value="g">grams</option>
+        <option value="ml">ml</option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -27,7 +33,7 @@ const emit = defineEmits(["update:modelValue"]);
 
 const value = computed({
   get() {
-    props.modelValue;
+    return props.modelValue;
   },
   set(newValue) {
     emit("update:modelValue", newValue);
@@ -38,7 +44,13 @@ const value = computed({
 <style scoped>
 .input-number-unit {
   display: flex;
-  gap: 0.5rem;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 </style>

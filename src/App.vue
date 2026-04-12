@@ -3,7 +3,7 @@
     <section class="hero">
       <p class="eyebrow">Vue 3 + Vite</p>
       <h1>CalcYouLater</h1>
-      <form id="input-form" class="input-form">
+      <form id="input-form" class="input-form stats">
         <!-- Amount used in recipe -->
         <InputNumberUnit
           label="Amount used in recipe"
@@ -11,10 +11,6 @@
         />
 
         <!-- Nutrition label serving size -->
-        <div>
-          <span class="label">Doubled</span>
-          <strong>{{ doubledCount }}</strong>
-        </div>
 
         <!-- Equivalent metric weight -->
 
