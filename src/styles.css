@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  --font-display: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  --font-body: "Work Sans", "Segoe UI", sans-serif;
+  --color-primary: #4e635a;
+  --color-on-primary: #ffffff;
+  --color-secondary: #944a00;
+  --color-secondary-container: #fc8f34;
+  --color-background: #fbf9f7;
+  --color-surface: #fbf9f7;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f5f3f1;
+  --color-surface-container-highest: #e4e2e0;
+  --color-on-surface: #1b1c1b;
+  --color-primary-container: #738d82;
+  --color-secondary-fixed: rgba(252, 143, 52, 0.18);
+  --color-surface-container-high: #e4e2e0;
+  --color-surface-dim: #ece7e1;
+  --color-outline-variant: rgba(78, 99, 90, 0.15);
+  --shadow-ambient: 0 12px 32px rgba(27, 28, 27, 0.06);
+}
