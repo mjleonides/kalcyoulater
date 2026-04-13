@@ -35,7 +35,7 @@ To add soul to the digital experience, use **Tonal Gradients** for high-impact a
 - **Hero Sections:** Use a linear gradient from `primary` to `primary_container` at a 15-degree angle.
 - **Glassmorphism:** For floating navigation or "active step" overlays, use `surface` at 70% opacity with a `24px` backdrop-blur. This keeps the cooking process visible underneath the utility.
 
----
+---/Users/mjl/Library/Messages/Attachments/cf/15/64C6A99D-1C7D-4B94-9760-A62248657345/icons-02.png
 
 ## 3. Typography: Legibility for Action
 
