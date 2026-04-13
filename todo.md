@@ -41,7 +41,15 @@ Single-page web application that converts recipe measurements and calculates tot
 
 ---
 
-## ⚙️ Calculation Logic
+## ⚙️ Calculation Logic (Dynamic)
+
+### Triggering Calculations
+
+- [ ] Calculations run automatically on input change
+- [ ] Debounce input updates (optional, recommended)
+- [ ] Prevent unnecessary re-renders
+
+---
 
 ### Metric Conversion
 
@@ -73,20 +81,20 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 ---
 
-## 🧮 Calculate Button
+## 📊 Output Display (Real-Time)
 
-- [ ] Button triggers calculations
-- [ ] Disabled until all required inputs are valid
-- [ ] Loading/feedback state (optional but preferred)
+### General Behavior
+
+- [ ] Updates instantly as user types
+- [ ] Shows placeholder/default state before valid input
+- [ ] Avoids flickering or jumpy UI
 
 ---
-
-## 📊 Output Display
 
 ### Metric Weight Result
 
 - [ ] Displays calculated grams
-- [ ] Updates dynamically on calculation
+- [ ] Updates dynamically
 - [ ] Styled to match mockup (prominent number)
 
 ---
@@ -114,14 +122,15 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 - [ ] Rounded input fields
 - [ ] Placeholder text implemented
 - [ ] Inline helper icon (optional)
+- [ ] Clear indication of active/focused field
 
 ---
 
-### Button
+### Removed: Submit Button
 
-- [ ] Styled primary CTA
-- [ ] Hover + active states
-- [ ] Disabled state styling
+- [ ] Remove "Calculate" button from UI
+- [ ] Ensure layout still feels balanced without it
+- [ ] Replace with subtle feedback (e.g., live updating results)
 
 ---
 
@@ -138,15 +147,16 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 ## 🌙 Theme / UX Enhancements
 
 - [ ] Dark mode toggle
-- [ ] Smooth transitions (optional)
+- [ ] Smooth transitions (especially for updating numbers)
 - [ ] Input focus states
+- [ ] Optional: animated number transitions
 
 ---
 
 ## 🧪 Validation & Error Handling
 
 - [ ] Prevent calculation if inputs missing
-- [ ] Show helpful error messages
+- [ ] Show inline validation states (instead of blocking submit)
 - [ ] Handle invalid numbers (NaN, negative values)
 - [ ] Unit mismatch warning (if implemented)
 
@@ -155,7 +165,8 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 ## 🔁 State Management
 
 - [ ] Inputs stored in state
-- [ ] Outputs derived from state
+- [ ] Outputs derived from state (no manual trigger)
+- [ ] Computed values memoized (if needed)
 - [ ] Clear/reset functionality (optional)
 
 ---
@@ -166,13 +177,14 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 - [ ] Project initialized
 - [ ] Component structure created
-- [ ] Form state handling implemented
+- [ ] Reactive form state handling implemented
 
 ---
 
 ### Logic Layer
 
 - [ ] Calculation functions isolated
+- [ ] Pure functions (no side effects)
 - [ ] Unit tests (optional but ideal)
 
 ---
@@ -188,7 +200,7 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 - [ ] Accessibility (labels, ARIA)
 - [ ] Keyboard navigation
-- [ ] Performance check
+- [ ] Performance check (no lag while typing)
 - [ ] Cross-browser testing
 
 ---
@@ -198,11 +210,12 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 - [ ] User can input recipe amount
 - [ ] User can input serving size and metric equivalent
 - [ ] User can input calories per serving
+- [ ] Results update automatically as inputs change
 - [ ] App calculates correct metric weight
 - [ ] App calculates correct total calories
 - [ ] Results display clearly and accurately
 - [ ] UI matches mockup design
-- [ ] App prevents invalid calculations
+- [ ] App prevents invalid calculations without needing a submit button
 
 ---
 
@@ -218,10 +231,6 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 ## Notes
 
-- Keep logic simple and predictable
-- Prioritize accuracy over feature complexity
-- UI should feel fast and frictionless
-
-```
-
-```
+- Prioritize instant feedback and smooth UX
+- Avoid overwhelming users with errors—guide instead
+- Keep calculations fast and deterministic
