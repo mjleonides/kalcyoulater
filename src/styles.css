@@ -1,8 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap");
 
 :root {
+  /* Typography tokens from DESIGN.md */
   --font-display: "Plus Jakarta Sans", "Segoe UI", sans-serif;
   --font-body: "Work Sans", "Segoe UI", sans-serif;
+
+  /* Core color tokens from DESIGN.md */
   --color-primary: #4e635a;
   --color-on-primary: #ffffff;
   --color-secondary: #944a00;
@@ -13,10 +16,46 @@
   --color-surface-container-low: #f5f3f1;
   --color-surface-container-highest: #e4e2e0;
   --color-on-surface: #1b1c1b;
+
+  /*
+   * Tokens referenced elsewhere in DESIGN.md without explicit hex values.
+   * These are documented here so the stylesheet has a complete token surface.
+   */
   --color-primary-container: #738d82;
   --color-secondary-fixed: rgba(252, 143, 52, 0.18);
   --color-surface-container-high: #e4e2e0;
   --color-surface-dim: #ece7e1;
   --color-outline-variant: rgba(78, 99, 90, 0.15);
+
+  /* Semantic aliases used by the app styles */
   --shadow-ambient: 0 12px 32px rgba(27, 28, 27, 0.06);
+  --shadow-focus: 0 0 0 6px rgba(78, 99, 90, 0.12);
+  --radius-card: 1rem;
+  --radius-chip: 0.75rem;
+  --radius-pill: 999px;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  font-family: var(--font-body);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--color-on-surface);
+  background:
+    radial-gradient(circle at top left, rgba(252, 143, 52, 0.08), transparent 28%),
+    radial-gradient(circle at right 18%, rgba(78, 99, 90, 0.12), transparent 34%),
+    linear-gradient(180deg, #fefcf8 0%, var(--color-background) 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
