@@ -45,7 +45,7 @@ Single-page web application that converts recipe measurements and calculates tot
 
 ### Triggering Calculations
 
-- [ ] Calculations run automatically on input change
+- [x] Calculations run automatically on input change
 - [ ] Debounce input updates (optional, recommended)
 - [ ] Prevent unnecessary re-renders
 
@@ -85,24 +85,24 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 ### General Behavior
 
-- [ ] Updates instantly as user types
-- [ ] Shows placeholder/default state before valid input
-- [ ] Avoids flickering or jumpy UI
+- [x] Updates instantly as user types
+- [x] Shows placeholder/default state before valid input
+- [x] Avoids flickering or jumpy UI
 
 ---
 
 ### Metric Weight Result
 
-- [ ] Displays calculated grams
-- [ ] Updates dynamically
+- [x] Displays calculated grams
+- [x] Updates dynamically
 - [ ] Styled to match mockup (prominent number)
 
 ---
 
 ### Total Calories Result
 
-- [ ] Displays total calories
-- [ ] Updates dynamically
+- [x] Displays total calories
+- [x] Updates dynamically
 - [ ] Styled to match mockup
 
 ---
