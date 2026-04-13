@@ -1,7 +1,13 @@
 <template>
+  <header>
+    <h1>KalcYouLater</h1>
+    <nav><a class="nav-link">Calculators</a></nav>
+    <div class="header-buttons">
+      <button id="theme-toggle" class="button">Toggle Theme</button>
+    </div>
+  </header>
   <main class="app-shell">
-    <section class="hero">
-      <h1>KalcYouLater</h1>
+    <section class="calculator-container">
       <form id="input-form" class="input-form">
         <!-- Amount used in recipe -->
         <InputNumberUnit
@@ -52,12 +58,12 @@
 
       <!-- Results -->
       <div class="results-container">
-        <div class="calculated-weight">
+        <div class="result calculated-weight">
           <p>Metric Weight to Use</p>
           <p v-if="calculatedWeight">{{ calculatedWeight.toFixed(2) }} g</p>
           <p v-else>--</p>
         </div>
-        <div class="calculated-calories">
+        <div class="result calculated-calories">
           <p>Calories in Recipe Amount</p>
           <p v-if="calculatedCalories">{{ calculatedCalories }} kcal</p>
           <p v-else>--</p>
