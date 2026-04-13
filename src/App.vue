@@ -48,9 +48,6 @@
           min="0"
           select-disabled
         />
-        <!-- <button form="input-form" class="action" type="submit"> -->
-        <!--   Calculate -->
-        <!-- </button> -->
       </form>
 
       <!-- Results -->
@@ -72,7 +69,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import InputNumberUnit from "./components/InputNumberUnit.vue";
-// import InputNumber from "./components/InputNumber.vue";
 
 const recipe = ref({ value: undefined, unit: "cups" });
 const servingSize = ref({ value: undefined });
