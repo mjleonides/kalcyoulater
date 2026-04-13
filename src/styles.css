@@ -7,6 +7,7 @@
 
   /* Core color tokens from DESIGN.md */
   --color-primary: #4e635a;
+  --color-primary-dark: #53625B;
   --color-on-primary: #ffffff;
   --color-secondary: #944a00;
   --color-secondary-container: #fc8f34;
@@ -30,8 +31,10 @@
   /* Semantic aliases used by the app styles */
   --shadow-ambient: 0 12px 32px rgba(27, 28, 27, 0.06);
   --shadow-focus: 0 0 0 6px rgba(78, 99, 90, 0.12);
+  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.04);
   --radius-card: 1rem;
   --radius-chip: 0.75rem;
+  --radius-field: 0.5rem;
   --radius-pill: 999px;
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
@@ -54,8 +57,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Reset and base styles */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+/* Step 1: Basic styling for all icons
+   These styles are required to make icons render reliably */
+.icon::before {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
