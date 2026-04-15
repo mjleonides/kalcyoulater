@@ -32,7 +32,7 @@ const value = defineModel();
 
 input {
   border: none;
-  min-height: 2rem;
+  min-height: var(--field-height);
   padding: 0.75rem 1rem;
   background: inherit;
   border-radius: var(--radius-field);

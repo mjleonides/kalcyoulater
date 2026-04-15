@@ -1,9 +1,15 @@
 <template>
   <header>
-    <h1>KalcYouLater</h1>
-    <nav><a class="nav-link">Calculators</a></nav>
+    <img class="logo" src="@/assets/icons/icons-01.png" width="40px" />
+    <nav></nav>
     <div class="header-buttons">
-      <button id="theme-toggle" class="button">Toggle Theme</button>
+      <ButtonComponent
+        id="theme-toggle"
+        label="Toggle Theme"
+        icon="fa-solid fa-moon fa-xl"
+        icon-only
+        text
+      />
     </div>
   </header>
   <main class="app-shell">
@@ -61,6 +67,15 @@
         />
       </form>
 
+      <div class="buttons">
+        <ButtonComponent
+          id="input-form-reset"
+          label="Reset"
+          icon="fa-solid fa-arrow-rotate-left"
+          @click="onReset"
+        />
+      </div>
+
       <!-- Results -->
       <div class="results-container">
         <div class="result calculated-weight">
@@ -89,19 +104,31 @@
   </main>
   <footer>
     <p class="site-name">KalcYouLater</p>
+    <p class="attribution">
+      Crafted by <a href="https://leonides.dev">leonides.dev</a>
+    </p>
     <p class="copyright">
-      &copy; {{ new Date().getFullYear() }} Delight Media Co.
+      &copy; {{ new Date().getFullYear() }}
+      <a href="https://delightmedia.co"> Delight Media Co. </a>
     </p>
   </footer>
 </template>
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import InputNumberUnit from "./components/InputNumberUnit.vue";
+import ButtonComponent from "./components/ButtonComponent.vue";
 
-const recipe = ref({ value: undefined, unit: "cups" });
-const servingSize = ref({ value: undefined });
-const equivalentMetricWeight = ref({ value: undefined, unit: "g" });
-const caloriesPerServing = ref({ value: undefined, unit: "kcal" });
+const defaultValues = {
+  recipe: { value: undefined, unit: "cups" },
+  servingSize: { value: undefined },
+  equivalentMetricWeight: { value: undefined, unit: "g" },
+  caloriesPerServing: { value: undefined, unit: "kcal" },
+};
+
+const recipe = ref(defaultValues.recipe);
+const servingSize = ref(defaultValues.servingSize);
+const equivalentMetricWeight = ref(defaultValues.equivalentMetricWeight);
+const caloriesPerServing = ref(defaultValues.caloriesPerServing);
 
 const calculatedWeight = computed(() => {
   if (
@@ -132,6 +159,13 @@ const calculatedCalories = computed(() => {
     recipe.value.value
   );
 });
+
+const onReset = () => {
+  recipe.value = { ...defaultValues.recipe };
+  servingSize.value = { ...defaultValues.servingSize };
+  equivalentMetricWeight.value = { ...defaultValues.equivalentMetricWeight };
+  caloriesPerServing.value = { ...defaultValues.caloriesPerServing };
+};
 </script>
 <style lang="css" scoped>
 header {
@@ -141,6 +175,7 @@ header {
   padding: 1rem;
   background-color: var(--color-background);
   color: var(--color-primary-dark);
+  font-style: italic;
 }
 
 .calculator-container {
@@ -167,11 +202,23 @@ form {
   width: 50%;
 }
 
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+#input-form-reset {
+  width: 100%;
+}
+
 .results-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   justify-content: space-between;
 }
 
@@ -179,7 +226,6 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 2rem;
   background-color: var(--color-background);
   padding: 1rem;
   border-radius: var(--radius-field);
@@ -214,11 +260,16 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  align-items: center;
 }
 
 .site-name {
-  font-family: var(--font-display);
   font-weight: 700;
-  text-transform: italic;
+  font-style: italic;
+}
+
+.attribution {
+  font-style: italic;
+  font-size: 0.875rem;
 }
 </style>

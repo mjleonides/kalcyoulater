@@ -79,7 +79,7 @@ label {
 :deep(select) {
   border: none;
   background: inherit;
-  min-height: 2rem;
+  min-height: var(--field-height);
   padding: 0.75rem;
   border-radius: var(--radius-field);
   appearance: none;
