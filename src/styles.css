@@ -48,14 +48,53 @@
   line-height: 1.5;
   font-weight: 400;
   color: var(--color-on-surface);
-  background:
-    radial-gradient(circle at top left, rgba(252, 143, 52, 0.08), transparent 28%),
-    radial-gradient(circle at right 18%, rgba(78, 99, 90, 0.12), transparent 34%),
-    linear-gradient(180deg, #fefcf8 0%, var(--color-background) 100%);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --theme-background: var(--color-background);
+  --theme-background-accent:
+    radial-gradient(circle at top left, rgba(252, 143, 52, 0.08), transparent 28%),
+    radial-gradient(circle at right 18%, rgba(78, 99, 90, 0.12), transparent 34%),
+    linear-gradient(180deg, #fefcf8 0%, var(--color-background) 100%);
+  --theme-surface: var(--color-surface-container-lowest);
+  --theme-surface-subtle: var(--color-surface-container-low);
+  --theme-text: var(--color-on-surface);
+  --theme-text-muted: rgba(27, 28, 27, 0.68);
+  --theme-heading: var(--color-primary-dark);
+  --theme-footer-background: var(--color-primary-dark);
+  --theme-footer-foreground: var(--color-on-primary);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --theme-background: #161917;
+  --theme-background-accent:
+    radial-gradient(circle at top left, rgba(252, 143, 52, 0.16), transparent 30%),
+    radial-gradient(circle at right 18%, rgba(115, 141, 130, 0.18), transparent 34%),
+    linear-gradient(180deg, #1b201d 0%, #161917 100%);
+  --theme-surface: #232925;
+  --theme-surface-subtle: #2a322d;
+  --theme-text: #f4f1ec;
+  --theme-text-muted: rgba(244, 241, 236, 0.72);
+  --theme-heading: #eef4ef;
+  --theme-footer-background: #101311;
+  --theme-footer-foreground: #f4f1ec;
+  --color-on-surface: #f4f1ec;
+  --color-surface: #161917;
+  --color-background: #161917;
+  --color-surface-container-lowest: #232925;
+  --color-surface-container-low: #1d221f;
+  --color-surface-container-high: #2a322d;
+  --color-surface-container-highest: #334039;
+  --color-surface-dim: #202621;
+  --color-outline-variant: rgba(244, 241, 236, 0.16);
+  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.24);
 }
 
 /* Reset and base styles */
@@ -77,4 +116,19 @@
 
 a {
   color: inherit;
+}
+
+html {
+  background: var(--theme-background);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--theme-background-accent);
+  color: var(--theme-text);
+  font-family: var(--font-body);
+  transition:
+    background 180ms ease,
+    color 180ms ease;
 }

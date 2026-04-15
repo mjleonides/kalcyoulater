@@ -5,10 +5,13 @@
     <div class="header-buttons">
       <ButtonComponent
         id="theme-toggle"
-        label="Toggle Theme"
-        icon="fa-solid fa-moon fa-xl"
+        :label="themeToggleLabel"
+        :icon="themeToggleIcon"
+        :aria-label="themeToggleLabel"
+        :aria-pressed="theme === 'dark'"
         icon-only
         text
+        @click="toggleTheme"
       />
     </div>
   </header>
@@ -114,9 +117,11 @@
   </footer>
 </template>
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { storeToRefs } from "pinia";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import InputNumberUnit from "./components/InputNumberUnit.vue";
 import ButtonComponent from "./components/ButtonComponent.vue";
+import { useThemeStore } from "./stores/theme";
 
 const defaultValues = {
   recipe: { value: undefined, unit: "cups" },
@@ -129,6 +134,17 @@ const recipe = ref(defaultValues.recipe);
 const servingSize = ref(defaultValues.servingSize);
 const equivalentMetricWeight = ref(defaultValues.equivalentMetricWeight);
 const caloriesPerServing = ref(defaultValues.caloriesPerServing);
+const themeStore = useThemeStore();
+const { theme, themeToggleIcon, themeToggleLabel } = storeToRefs(themeStore);
+const { cleanupTheme, initializeTheme, toggleTheme } = themeStore;
+
+onMounted(() => {
+  initializeTheme();
+});
+
+onBeforeUnmount(() => {
+  cleanupTheme();
+});
 
 const calculatedWeight = computed(() => {
   if (
@@ -173,13 +189,13 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: var(--color-background);
-  color: var(--color-primary-dark);
+  background-color: var(--theme-background);
+  color: var(--theme-heading);
   font-style: italic;
 }
 
 .calculator-container {
-  background: white;
+  background: var(--theme-surface);
   margin: 2rem auto;
   padding: 2rem;
   max-width: 40rem;
@@ -226,7 +242,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: var(--color-background);
+  background-color: var(--theme-surface-subtle);
   padding: 1rem;
   border-radius: var(--radius-field);
 }
@@ -242,7 +258,7 @@ form {
 .result-value {
   font-size: 2.25rem;
   font-weight: 700;
-  color: var(--color-primary-dark);
+  color: var(--theme-heading);
 }
 
 .result-unit {
@@ -255,8 +271,8 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   padding: 1rem;
-  background-color: var(--color-primary-dark);
-  color: var(--color-on-primary);
+  background-color: var(--theme-footer-background);
+  color: var(--theme-footer-foreground);
   position: fixed;
   bottom: 0;
   width: 100%;
