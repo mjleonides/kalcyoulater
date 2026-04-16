@@ -207,6 +207,12 @@ header {
   font-style: italic;
 }
 
+@media (max-width: 600px) {
+  header {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
 .calculator-container {
   background: var(--theme-surface);
   margin: 2rem auto;

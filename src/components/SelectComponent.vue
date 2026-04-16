@@ -75,6 +75,7 @@ select {
   border-radius: var(--radius-field);
   appearance: none;
   font-size: var(--field-font-size);
+  color: var(--color-on-surface);
 }
 
 select:not(:disabled) {
@@ -92,6 +93,12 @@ select:disabled {
 i {
   position: absolute;
   right: 0.75rem;
+}
+
+@media (max-width: 400px) {
+  i {
+    right: 0.5rem;
+  }
 }
 
 option {
