@@ -36,5 +36,7 @@ input {
   padding: 0.75rem 1rem;
   background: inherit;
   border-radius: var(--radius-field);
+  font-size: var(--field-font-size);
+  width: 100%;
 }
 </style>

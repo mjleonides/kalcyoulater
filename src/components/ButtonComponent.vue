@@ -47,6 +47,7 @@ const classes = computed(() => {
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
+  font-size: var(--field-font-size);
 }
 
 .button-primary {

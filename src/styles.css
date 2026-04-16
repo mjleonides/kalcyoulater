@@ -43,6 +43,7 @@
   --space-xl: 2rem;
   --space-2xl: 3rem;
   --field-height: 3rem;
+  --field-font-size: 1rem;
 
   font-family: var(--font-body);
   line-height: 1.5;
