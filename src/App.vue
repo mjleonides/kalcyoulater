@@ -25,6 +25,7 @@
           label="Amount in Recipe"
           v-model:value="recipe.value"
           v-model:unit="recipe.unit"
+          :options="unitOptions"
           placeholder="e.g. 1"
           required
           inputmode="decimal"
@@ -38,6 +39,7 @@
             label="Serving Size"
             v-model:value="servingSize.value"
             v-model:unit="recipe.unit"
+            :options="unitOptions"
             placeholder="e.g. 1"
             required
             inputmode="decimal"
@@ -50,6 +52,7 @@
             label="Equivalent Metric Weight"
             v-model:value="equivalentMetricWeight.value"
             v-model:unit="equivalentMetricWeight.unit"
+            :options="unitOptions"
             placeholder="e.g. 63"
             required
             inputmode="decimal"
@@ -62,6 +65,7 @@
           label="Calories per Serving"
           v-model:value="caloriesPerServing.value"
           v-model:unit="caloriesPerServing.unit"
+          :options="[{ value: 'kcal', label: 'kcal' }]"
           placeholder="e.g. 220"
           required
           inputmode="decimal"
@@ -146,6 +150,15 @@ onBeforeUnmount(() => {
   cleanupTheme();
 });
 
+const unitOptions = [
+  { value: "cups", label: "cups" },
+  { value: "oz", label: "ounces" },
+  { value: "tbsp", label: "tbsps" },
+  { value: "tsp", label: "tsp" },
+  { value: "g", label: "grams" },
+  { value: "ml", label: "ml" },
+];
+
 const calculatedWeight = computed(() => {
   if (
     !recipe.value.value ||
@@ -216,6 +229,16 @@ form {
 
 .field-row .input-number-unit {
   width: 50%;
+}
+
+@media (max-width: 600px) {
+  .field-row {
+    flex-direction: column;
+  }
+
+  .field-row .input-number-unit {
+    width: 100%;
+  }
 }
 
 .buttons {
