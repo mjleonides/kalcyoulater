@@ -45,13 +45,13 @@
             inputmode="decimal"
           />
 
-          <!-- Equivalent metric weight -->
+          <!-- Equivalent weight -->
           <InputNumberUnit
-            id="equivalent-metric-weight"
-            name="equivalent-metric-weight"
-            label="Equivalent Metric Weight"
-            v-model:value="equivalentMetricWeight.value"
-            v-model:unit="equivalentMetricWeight.unit"
+            id="equivalent-weight"
+            name="equivalent-weight"
+            label="Equivalent Weight Conversion"
+            v-model:value="equivalentWeight.value"
+            v-model:unit="equivalentWeight.unit"
             :options="unitOptions"
             placeholder="e.g. 63"
             required
@@ -88,11 +88,11 @@
         <div class="result calculated-weight">
           <div>
             <h2>Calculated Result</h2>
-            <p>Metric Weight to Use</p>
+            <p>Converted Weight to Use</p>
           </div>
           <p class="result-value" v-if="calculatedWeight">
             {{ calculatedWeight.toFixed(1) }}
-            <span class="result-unit">{{ equivalentMetricWeight.unit }}</span>
+            <span class="result-unit">{{ equivalentWeight.unit }}</span>
           </p>
           <p v-else>--</p>
         </div>
@@ -130,13 +130,13 @@ import { useThemeStore } from "./stores/theme";
 const defaultValues = {
   recipe: { value: undefined, unit: "cups" },
   servingSize: { value: undefined },
-  equivalentMetricWeight: { value: undefined, unit: "g" },
+  equivalentWeight: { value: undefined, unit: "g" },
   caloriesPerServing: { value: undefined, unit: "kcal" },
 };
 
 const recipe = ref(defaultValues.recipe);
 const servingSize = ref(defaultValues.servingSize);
-const equivalentMetricWeight = ref(defaultValues.equivalentMetricWeight);
+const equivalentWeight = ref(defaultValues.equivalentWeight);
 const caloriesPerServing = ref(defaultValues.caloriesPerServing);
 const themeStore = useThemeStore();
 const { theme, themeToggleIcon, themeToggleLabel } = storeToRefs(themeStore);
@@ -163,14 +163,14 @@ const calculatedWeight = computed(() => {
   if (
     !recipe.value.value ||
     !servingSize.value.value ||
-    !equivalentMetricWeight.value.value
+    !equivalentWeight.value.value
   ) {
     return undefined;
   }
 
   return (
     recipe.value.value *
-    (equivalentMetricWeight.value.value / servingSize.value.value)
+    (equivalentWeight.value.value / servingSize.value.value)
   );
 });
 
@@ -192,7 +192,7 @@ const calculatedCalories = computed(() => {
 const onReset = () => {
   recipe.value = { ...defaultValues.recipe };
   servingSize.value = { ...defaultValues.servingSize };
-  equivalentMetricWeight.value = { ...defaultValues.equivalentMetricWeight };
+  equivalentWeight.value = { ...defaultValues.equivalentWeight };
   caloriesPerServing.value = { ...defaultValues.caloriesPerServing };
 };
 </script>
@@ -306,6 +306,15 @@ footer {
   bottom: 0;
   width: 100%;
   align-items: center;
+}
+
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    position: static;
+  }
 }
 
 .site-name {
