@@ -49,7 +49,7 @@
           <InputNumberUnit
             id="equivalent-weight"
             name="equivalent-weight"
-            label="Equivalent Weight Conversion"
+            label="Equivalent Weight"
             v-model:value="equivalentWeight.value"
             v-model:unit="equivalentWeight.unit"
             :options="unitOptions"
@@ -207,7 +207,7 @@ header {
   font-style: italic;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
   header {
     padding: 0.5rem 0.75rem;
   }
@@ -220,6 +220,13 @@ header {
   max-width: 40rem;
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 400px) {
+  .calculator-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
 }
 
 form {
@@ -308,7 +315,7 @@ footer {
   align-items: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   footer {
     flex-direction: column;
     gap: 0.5rem;
