@@ -51,7 +51,7 @@ Single-page web application that converts recipe measurements and calculates tot
 
 ---
 
-### Metric Conversion
+### Measure Conversion
 
 - [x] Formula implemented:
 
@@ -63,6 +63,7 @@ metric_weight = (amount_used / serving_size) * metric_equivalent
 
 - [ ] Handles decimals correctly
 - [ ] Converts amount in recipe units to serving size units before calculating equivalent measure
+  - e.g. Recipe gives 1 cups of chocolate chips, nutrition label says a serving size is 1 tbsp (14g) and 70 calories per serving
 - [ ] Supports unit conversion across compatible volume units (e.g. cups, tbsp, tsp, oz, ml)
 - [ ] Handles edge cases (division by zero, missing inputs)
 
@@ -78,7 +79,7 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 ```
 
-- [ ] Rounds output appropriately
+- [x] Rounds output appropriately
 - [ ] Handles invalid inputs gracefully
 
 ---
@@ -93,11 +94,11 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 ---
 
-### Metric Weight Result
+### Converted Measure Result
 
 - [x] Displays calculated grams
 - [x] Updates dynamically
-- [ ] Styled to match mockup (prominent number)
+- [x] Styled to match mockup (prominent number)
 
 ---
 
@@ -105,7 +106,7 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 - [x] Displays total calories
 - [x] Updates dynamically
-- [ ] Styled to match mockup
+- [x] Styled to match mockup
 
 ---
 
@@ -113,51 +114,51 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 ### Layout
 
-- [ ] Centered card layout
-- [ ] Responsive (mobile + desktop)
-- [ ] Matches spacing from mockup
+- [x] Centered card layout
+- [x] Responsive (mobile + desktop)
+- [x] Matches spacing from mockup
 
 ---
 
 ### Inputs
 
-- [ ] Rounded input fields
-- [ ] Placeholder text implemented
+- [x] Rounded input fields
+- [x] Placeholder text implemented
 - [ ] Inline helper icon (optional)
-- [ ] Clear indication of active/focused field
+- [x] Clear indication of active/focused field
 
 ---
 
 ### Removed: Submit Button
 
-- [ ] Remove "Calculate" button from UI
-- [ ] Ensure layout still feels balanced without it
-- [ ] Replace with subtle feedback (e.g., live updating results)
+- [x] Remove "Calculate" button from UI
+- [x] Ensure layout still feels balanced without it
+- [x] Replace with subtle feedback (e.g., live updating results)
 
 ---
 
 ### Results Cards
 
-- [ ] Two-column layout
+- [x] Two-column layout
 - [ ] Distinct styling for:
   - [ ] Metric Weight
   - [ ] Calories
-- [ ] Typography hierarchy implemented
+- [x] Typography hierarchy implemented
 
 ---
 
 ## 🌙 Theme / UX Enhancements
 
-- [ ] Dark mode toggle
-- [ ] Smooth transitions (especially for updating numbers)
-- [ ] Input focus states
+- [x] Dark mode toggle
+- [x] Smooth transitions (especially for updating numbers)
+- [x] Input focus states
 - [ ] Optional: animated number transitions
 
 ---
 
 ## 🧪 Validation & Error Handling
 
-- [ ] Prevent calculation if inputs missing
+- [x] Prevent calculation if inputs missing
 - [ ] Show inline validation states (instead of blocking submit)
 - [ ] Handle invalid numbers (NaN, negative values)
 - [ ] Unit mismatch warning (if implemented)
@@ -166,10 +167,10 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 ## 🔁 State Management
 
-- [ ] Inputs stored in state
-- [ ] Outputs derived from state (no manual trigger)
+- [x] Inputs stored in state
+- [x] Outputs derived from state (no manual trigger)
 - [ ] Computed values memoized (if needed)
-- [ ] Clear/reset functionality (optional)
+- [x] Clear/reset functionality (optional)
 
 ---
 
@@ -177,15 +178,15 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 ### Frontend
 
-- [ ] Project initialized
-- [ ] Component structure created
-- [ ] Reactive form state handling implemented
+- [x] Project initialized
+- [x] Component structure created
+- [x] Reactive form state handling implemented
 
 ---
 
 ### Logic Layer
 
-- [ ] Calculation functions isolated
+- [x] Calculation functions isolated
 - [ ] Pure functions (no side effects)
 - [ ] Unit tests (optional but ideal)
 
@@ -193,8 +194,8 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 ### Styling
 
-- [ ] Global styles set
-- [ ] Component-level styling complete
+- [x] Global styles set
+- [x] Component-level styling complete
 
 ---
 
@@ -209,16 +210,16 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 
 ## ✅ Acceptance Criteria Checklist
 
-- [ ] User can input recipe amount
-- [ ] User can input serving size and equivalent measure
+- [x] User can input recipe amount
+- [x] User can input serving size and equivalent measure
 - [ ] App converts recipe amount units into serving size units before calculating equivalent measure
-- [ ] User can input calories per serving
-- [ ] Results update automatically as inputs change
-- [ ] App calculates correct metric weight
-- [ ] App calculates correct total calories
-- [ ] Results display clearly and accurately
-- [ ] UI matches mockup design
-- [ ] App prevents invalid calculations without needing a submit button
+- [x] User can input calories per serving
+- [x] Results update automatically as inputs change
+- [x] App calculates correct converted weight
+- [x] App calculates correct total calories
+- [x] Results display clearly and accurately
+- [x] UI matches mockup design
+- [x] App prevents invalid calculations without needing a submit button
 
 ---
 
