@@ -134,10 +134,10 @@ const defaultValues = {
   caloriesPerServing: { value: undefined, unit: "kcal" },
 };
 
-const recipe = ref(defaultValues.recipe);
-const servingSize = ref(defaultValues.servingSize);
-const equivalentWeight = ref(defaultValues.equivalentWeight);
-const caloriesPerServing = ref(defaultValues.caloriesPerServing);
+const recipe = ref({ ...defaultValues.recipe });
+const servingSize = ref({ ...defaultValues.servingSize });
+const equivalentWeight = ref({ ...defaultValues.equivalentWeight });
+const caloriesPerServing = ref({ ...defaultValues.caloriesPerServing });
 const themeStore = useThemeStore();
 const { theme, themeToggleIcon, themeToggleLabel } = storeToRefs(themeStore);
 const { cleanupTheme, initializeTheme, toggleTheme } = themeStore;
