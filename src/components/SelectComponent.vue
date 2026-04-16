@@ -56,6 +56,14 @@ const getSelectedOptionWidth = () => {
 };
 
 watch(model, getSelectedOptionWidth, { immediate: true });
+watch(
+  () => props.options,
+  (newOptions, oldOptions) => {
+    if (newOptions.length !== oldOptions.length) {
+      model.value = newOptions[0].value;
+    }
+  },
+);
 </script>
 
 <style scoped>

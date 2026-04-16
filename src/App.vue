@@ -38,8 +38,8 @@
             name="serving-size"
             label="Serving Size"
             v-model:value="servingSize.value"
-            v-model:unit="recipe.unit"
-            :options="unitOptions"
+            v-model:unit="servingSize.unit"
+            :options="limitedUnitOptions"
             placeholder="e.g. 1"
             required
             inputmode="decimal"
@@ -53,7 +53,7 @@
             v-model:value="equivalentMeasure.value"
             v-model:unit="equivalentMeasure.unit"
             :options="unitOptions"
-            placeholder="e.g. 63"
+            placeholder="e.g. 14"
             required
             inputmode="decimal"
           />
@@ -66,7 +66,7 @@
           v-model:value="caloriesPerServing.value"
           v-model:unit="caloriesPerServing.unit"
           :options="[{ value: 'kcal', label: 'kcal' }]"
-          placeholder="e.g. 220"
+          placeholder="e.g. 70"
           required
           inputmode="decimal"
           min="0"
@@ -88,10 +88,11 @@
         <div class="result calculated-weight">
           <div>
             <h2>Calculated Result</h2>
+            <!-- only use "converted" if conversion actually reqd -->
             <p>Converted Measure to Use</p>
           </div>
-          <p class="result-value" v-if="calculatedWeight">
-            {{ calculatedWeight.toFixed(1) }}
+          <p class="result-value" v-if="calculatedMeasure">
+            {{ calculatedMeasure.toFixed(1) }}
             <span class="result-unit">{{ equivalentMeasure.unit }}</span>
           </p>
           <p v-else>--</p>
@@ -126,10 +127,11 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import InputNumberUnit from "./components/InputNumberUnit.vue";
 import ButtonComponent from "./components/ButtonComponent.vue";
 import { useThemeStore } from "./stores/theme";
+import { unitDefinitions, convertUnit } from "./lib/unit-conversions";
 
 const defaultValues = {
   recipe: { value: undefined, unit: "cups" },
-  servingSize: { value: undefined },
+  servingSize: { value: undefined, unit: "tbsp" },
   equivalentMeasure: { value: undefined, unit: "g" },
   caloriesPerServing: { value: undefined, unit: "kcal" },
 };
@@ -150,43 +152,69 @@ onBeforeUnmount(() => {
   cleanupTheme();
 });
 
-const unitOptions = [
-  { value: "cups", label: "cups" },
-  { value: "oz", label: "ounces" },
-  { value: "tbsp", label: "tbsps" },
-  { value: "tsp", label: "tsp" },
-  { value: "g", label: "grams" },
-  { value: "ml", label: "ml" },
-];
+const unitOptions = Object.entries(unitDefinitions).map(
+  ([unit, definition]) => ({
+    value: unit,
+    label: definition.label,
+  }),
+);
 
-const calculatedWeight = computed(() => {
+const limitedUnitOptions = computed(() => {
+  const recipeUnit = recipe.value.unit;
+  if (recipeUnit) {
+    const reciptUnitCategory = unitDefinitions[recipeUnit].category;
+
+    return Object.entries(unitDefinitions)
+      .filter(([, definition]) => definition.category === reciptUnitCategory)
+      .map(([unit, definition]) => ({
+        value: unit,
+        label: definition.label,
+      }));
+  }
+  return unitOptions;
+});
+
+const calculatedMeasure = computed(() => {
+  /*
+  This should output in 3 scenarios:
+    - recipe (cups) * equivalent (any) / serving size (cups) = result (any) 
+    - converted recipe (cups > tbsp) * equivalent (any) / serving size (tbsp) = result (any)
+    - converted recipe (cups > tbsp) / serving size (tbsp) = result (tbsp)
+  */
   if (
-    !recipe.value.value ||
-    !servingSize.value.value ||
-    !equivalentMeasure.value.value
+    recipe.value.value &&
+    servingSize.value.value &&
+    equivalentMeasure.value.value
   ) {
-    return undefined;
+    let result: number = recipe.value.value;
+
+    if (recipe.value.unit !== servingSize.value.unit) {
+      result = convertUnit(
+        recipe.value.value,
+        recipe.value.unit,
+        servingSize.value.unit,
+      );
+    }
+    return result * (equivalentMeasure.value.value / servingSize.value.value);
   }
 
-  return (
-    recipe.value.value *
-    (equivalentMeasure.value.value / servingSize.value.value)
-  );
+  return undefined;
 });
 
 const calculatedCalories = computed(() => {
+  // currenlty broken as it does not account for converted amount in recipe
   if (
-    !caloriesPerServing.value.value ||
-    !servingSize.value.value ||
-    !recipe.value.value
+    caloriesPerServing.value.value &&
+    servingSize.value.value &&
+    recipe.value.value
   ) {
-    return undefined;
+    return (
+      (caloriesPerServing.value.value / servingSize.value.value) *
+      recipe.value.value
+    );
   }
 
-  return (
-    (caloriesPerServing.value.value / servingSize.value.value) *
-    recipe.value.value
-  );
+  return undefined;
 });
 
 const onReset = () => {
