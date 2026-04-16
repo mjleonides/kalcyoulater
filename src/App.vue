@@ -45,13 +45,13 @@
             inputmode="decimal"
           />
 
-          <!-- Equivalent weight -->
+          <!-- Equivalent measure -->
           <InputNumberUnit
-            id="equivalent-weight"
-            name="equivalent-weight"
-            label="Equivalent Weight"
-            v-model:value="equivalentWeight.value"
-            v-model:unit="equivalentWeight.unit"
+            id="equivalent-measure"
+            name="equivalent-measure"
+            label="Equivalent Measure"
+            v-model:value="equivalentMeasure.value"
+            v-model:unit="equivalentMeasure.unit"
             :options="unitOptions"
             placeholder="e.g. 63"
             required
@@ -88,11 +88,11 @@
         <div class="result calculated-weight">
           <div>
             <h2>Calculated Result</h2>
-            <p>Converted Weight to Use</p>
+            <p>Converted Measure to Use</p>
           </div>
           <p class="result-value" v-if="calculatedWeight">
             {{ calculatedWeight.toFixed(1) }}
-            <span class="result-unit">{{ equivalentWeight.unit }}</span>
+            <span class="result-unit">{{ equivalentMeasure.unit }}</span>
           </p>
           <p v-else>--</p>
         </div>
@@ -130,13 +130,13 @@ import { useThemeStore } from "./stores/theme";
 const defaultValues = {
   recipe: { value: undefined, unit: "cups" },
   servingSize: { value: undefined },
-  equivalentWeight: { value: undefined, unit: "g" },
+  equivalentMeasure: { value: undefined, unit: "g" },
   caloriesPerServing: { value: undefined, unit: "kcal" },
 };
 
 const recipe = ref({ ...defaultValues.recipe });
 const servingSize = ref({ ...defaultValues.servingSize });
-const equivalentWeight = ref({ ...defaultValues.equivalentWeight });
+const equivalentMeasure = ref({ ...defaultValues.equivalentMeasure });
 const caloriesPerServing = ref({ ...defaultValues.caloriesPerServing });
 const themeStore = useThemeStore();
 const { theme, themeToggleIcon, themeToggleLabel } = storeToRefs(themeStore);
@@ -163,14 +163,14 @@ const calculatedWeight = computed(() => {
   if (
     !recipe.value.value ||
     !servingSize.value.value ||
-    !equivalentWeight.value.value
+    !equivalentMeasure.value.value
   ) {
     return undefined;
   }
 
   return (
     recipe.value.value *
-    (equivalentWeight.value.value / servingSize.value.value)
+    (equivalentMeasure.value.value / servingSize.value.value)
   );
 });
 
@@ -192,7 +192,7 @@ const calculatedCalories = computed(() => {
 const onReset = () => {
   recipe.value = { ...defaultValues.recipe };
   servingSize.value = { ...defaultValues.servingSize };
-  equivalentWeight.value = { ...defaultValues.equivalentWeight };
+  equivalentMeasure.value = { ...defaultValues.equivalentMeasure };
   caloriesPerServing.value = { ...defaultValues.caloriesPerServing };
 };
 </script>

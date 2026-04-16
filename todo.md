@@ -25,7 +25,7 @@ Single-page web application that converts recipe measurements and calculates tot
 
 ---
 
-### 3. Input: Equivalent Metric Weight
+### 3. Input: Equivalent Measure
 
 - [x] Create input field
 - [x] Accept grams (numeric only)
@@ -62,6 +62,8 @@ metric_weight = (amount_used / serving_size) * metric_equivalent
 ```
 
 - [ ] Handles decimals correctly
+- [ ] Converts amount in recipe units to serving size units before calculating equivalent measure
+- [ ] Supports unit conversion across compatible volume units (e.g. cups, tbsp, tsp, oz, ml)
 - [ ] Handles edge cases (division by zero, missing inputs)
 
 ---
@@ -208,7 +210,8 @@ total_calories = (amount_used / serving_size) * calories_per_serving
 ## ✅ Acceptance Criteria Checklist
 
 - [ ] User can input recipe amount
-- [ ] User can input serving size and metric equivalent
+- [ ] User can input serving size and equivalent measure
+- [ ] App converts recipe amount units into serving size units before calculating equivalent measure
 - [ ] User can input calories per serving
 - [ ] Results update automatically as inputs change
 - [ ] App calculates correct metric weight
