@@ -372,6 +372,12 @@ footer {
   align-items: center;
 }
 
+@media (max-height: 820px) and (orientation: landscape) {
+  footer {
+    position: static;
+  }
+}
+
 @media (max-width: 500px) {
   footer {
     flex-direction: column;
