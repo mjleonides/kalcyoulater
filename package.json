@@ -1,5 +1,5 @@
 {
-  "name": "calcyoulater",
+  "name": "kalcyoulater",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -24,7 +24,7 @@
     "jsdom": "^25.0.1",
     "typescript": "^5.7.2",
     "vite": "^6.0.5",
-    "vite-plugin-pwa": "^0.19.8",
+    "vite-plugin-pwa": "^1.2.0",
     "vitest": "^4.1.4",
     "vue-tsc": "^2.2.0"
   }
