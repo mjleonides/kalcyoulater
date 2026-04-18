@@ -88,12 +88,18 @@
         <div class="result calculated-weight">
           <div>
             <h2>Calculated Result</h2>
-            <!-- only use "converted" if conversion actually reqd -->
-            <p>Converted Measure to Use</p>
+            <p>{{ conversionRequired ? "Converted" : "" }} Measure to Use</p>
           </div>
-          <p class="result-value" v-if="calculatedMeasure">
-            {{ calculatedMeasure.toFixed(1) }}
-            <span class="result-unit">{{ equivalentMeasure.unit }}</span>
+          <p
+            class="result-value"
+            v-if="
+              calculatedMeasure &&
+              calculatedMeasure.measure &&
+              calculatedMeasure.unit
+            "
+          >
+            {{ calculatedMeasure.measure.toFixed(1) }}
+            <span class="result-unit">{{ calculatedMeasure.unit }}</span>
           </p>
           <p v-else>--</p>
         </div>
@@ -103,7 +109,8 @@
             <p>Calories in Recipe Amount</p>
           </div>
           <p class="result-value" v-if="calculatedCalories">
-            {{ calculatedCalories }} <span class="result-unit">kcal</span>
+            {{ Math.round(calculatedCalories) }}
+            <span class="result-unit">kcal</span>
           </p>
           <p v-else>--</p>
         </div>
@@ -174,44 +181,66 @@ const limitedUnitOptions = computed(() => {
   return unitOptions;
 });
 
+const conversionRequired = computed(() => {
+  return (
+    recipe.value.value &&
+    servingSize.value.unit &&
+    recipe.value.unit !== servingSize.value.unit
+  );
+});
+
 const calculatedMeasure = computed(() => {
   /*
   This should output in 3 scenarios:
-    - recipe (cups) * equivalent (any) / serving size (cups) = result (any) 
-    - converted recipe (cups > tbsp) * equivalent (any) / serving size (tbsp) = result (any)
-    - converted recipe (cups > tbsp) / serving size (tbsp) = result (tbsp)
+    if recipe has value and serving size has unit that is different, convert the receipe value else output nothing since that would not be valuable
+    if recipe and serving size provided and equivalent measure provided but different units, convert recipe to serving size unit then use recipe * eq meausure / serving size
+    if recipe, serving size, and equivalent measure all have value, and same units then use recipe * eq meausure / serving size
   */
+
+  let measure: number | undefined = undefined;
+  let unit: string | undefined = undefined;
+
+  if (recipe.value.value && servingSize.value.unit) {
+    if (conversionRequired.value) {
+      measure = convertUnit(
+        recipe.value.value,
+        recipe.value.unit,
+        servingSize.value.unit,
+      );
+      unit = servingSize.value.unit;
+    } else {
+      measure = recipe.value.value;
+    }
+
+    if (servingSize.value.value && equivalentMeasure.value.value) {
+      measure =
+        (measure * equivalentMeasure.value.value) / servingSize.value.value;
+      unit = equivalentMeasure.value.unit;
+    }
+  }
+
+  return { measure, unit };
+});
+
+const calculatedCalories = computed(() => {
+  let measure: number | undefined = undefined;
+
   if (
     recipe.value.value &&
     servingSize.value.value &&
-    equivalentMeasure.value.value
+    caloriesPerServing.value.value
   ) {
-    let result: number = recipe.value.value;
-
-    if (recipe.value.unit !== servingSize.value.unit) {
-      result = convertUnit(
+    if (recipe.value.unit === servingSize.value.unit) {
+      measure = recipe.value.value;
+    } else {
+      measure = convertUnit(
         recipe.value.value,
         recipe.value.unit,
         servingSize.value.unit,
       );
     }
-    return result * (equivalentMeasure.value.value / servingSize.value.value);
-  }
 
-  return undefined;
-});
-
-const calculatedCalories = computed(() => {
-  // currenlty broken as it does not account for converted amount in recipe
-  if (
-    caloriesPerServing.value.value &&
-    servingSize.value.value &&
-    recipe.value.value
-  ) {
-    return (
-      (caloriesPerServing.value.value / servingSize.value.value) *
-      recipe.value.value
-    );
+    return (caloriesPerServing.value.value / servingSize.value.value) * measure;
   }
 
   return undefined;
